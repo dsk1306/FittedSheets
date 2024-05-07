@@ -45,7 +45,9 @@ public struct SheetOptions {
     public var maxWidth: CGFloat?
 
     public var isRubberBandEnabled: Bool = false
-    
+
+    public var panEndAnimationDuration: TimeInterval?
+
     /// Experimental flag that attempts to shrink the nested presentations more each time a new sheet is presented. This must be set before any sheet is presented.
     public static var shrinkingNestedPresentingViewControllers = false
     
@@ -59,7 +61,8 @@ public struct SheetOptions {
                 useInlineMode: Bool? = nil,
                 horizontalPadding: CGFloat? = nil,
                 maxWidth: CGFloat? = nil,
-                isRubberBandEnabled: Bool? = nil) {
+                isRubberBandEnabled: Bool? = nil,
+                panEndAnimationDuration: TimeInterval? = nil) {
         let defaultOptions = SheetOptions.default
         self.pullBarHeight = pullBarHeight ?? defaultOptions.pullBarHeight
         self.presentingViewCornerRadius = presentingViewCornerRadius ?? defaultOptions.presentingViewCornerRadius
@@ -72,6 +75,7 @@ public struct SheetOptions {
         let maxWidth = maxWidth ?? defaultOptions.maxWidth
         self.maxWidth = maxWidth == 0 ? nil : maxWidth
         self.isRubberBandEnabled = isRubberBandEnabled ?? false
+        self.panEndAnimationDuration = panEndAnimationDuration
     }
     
     @available(*, unavailable, message: "cornerRadius, minimumSpaceAbovePullBar, gripSize and gripColor are now properties on SheetViewController. Use them instead.")
@@ -85,7 +89,8 @@ public struct SheetOptions {
                 useFullScreenMode: Bool? = nil,
                 shrinkPresentingViewController: Bool? = nil,
                 useInlineMode: Bool? = nil,
-                minimumSpaceAbovePullBar: CGFloat? = nil) {
+                minimumSpaceAbovePullBar: CGFloat? = nil,
+                panEndAnimationDuration: TimeInterval? = nil) {
         let defaultOptions = SheetOptions.default
         self.pullBarHeight = pullBarHeight ?? defaultOptions.pullBarHeight
         self.presentingViewCornerRadius = presentingViewCornerRadius ?? defaultOptions.presentingViewCornerRadius
@@ -94,6 +99,7 @@ public struct SheetOptions {
         self.useFullScreenMode = useFullScreenMode ?? defaultOptions.useFullScreenMode
         self.shrinkPresentingViewController = shrinkPresentingViewController ?? defaultOptions.shrinkPresentingViewController
         self.useInlineMode = useInlineMode ?? defaultOptions.useInlineMode
+        self.panEndAnimationDuration = panEndAnimationDuration
     }
 }
 
