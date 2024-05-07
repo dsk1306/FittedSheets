@@ -275,7 +275,7 @@ public class SheetContentViewController: UIViewController {
         pullBarView.backgroundColor = self.pullBarBackgroundColor
         self.contentWrapperView.addSubview(pullBarView)
         Constraints(for: pullBarView) {
-            $0.top.pinToSuperview()
+            $0.top.pinToSuperview(inset: 8)
             $0.left.pinToSuperview()
             $0.right.pinToSuperview()
             $0.height.set(options.pullBarHeight)
