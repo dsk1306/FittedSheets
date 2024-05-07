@@ -149,6 +149,7 @@ public class SheetViewController: UIViewController {
     public var shouldDismiss: ((SheetViewController) -> Bool)?
     public var didDismiss: ((SheetViewController) -> Void)?
     public var sizeChanged: ((SheetViewController, SheetSize, CGFloat) -> Void)?
+    public var contentHeightChanged: ((CGFloat) -> Void)?
     public var panGestureShouldBegin: ((UIPanGestureRecognizer) -> Bool?)?
     
     public private(set) var contentViewController: SheetContentViewController
@@ -395,6 +396,7 @@ public class SheetViewController: UIViewController {
             }
         }
         
+        self.contentHeightChanged?(newHeight)
         switch gesture.state {
             case .cancelled, .failed:
                 UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseOut], animations: {
@@ -408,7 +410,6 @@ public class SheetViewController: UIViewController {
             
             case .began, .changed:
                 self.contentViewHeightConstraint.constant = newHeight
-                
                 if offset > 0 {
                     let percent = max(0, min(1, offset / max(1, newHeight)))
                     self.transition.setPresentor(percentComplete: percent)
@@ -472,6 +473,7 @@ public class SheetViewController: UIViewController {
                 self.currentSize = newSize
                 
                 let newContentHeight = self.height(for: newSize)
+                self.contentHeightChanged?(newContentHeight)
                 UIView.animate(
                     withDuration: animationDuration,
                     delay: 0,
